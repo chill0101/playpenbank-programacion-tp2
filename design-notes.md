@@ -219,5 +219,3 @@ src/
 2. El sistema calcula y muestra estadísticas (total transacciones, tipo más frecuente, totales, etc.).
 
 ---
-
-> Puedes usar este mapa para documentar o modelar los procesos del sistema.
