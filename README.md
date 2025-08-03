@@ -72,6 +72,19 @@ El sistema permite:
 - **ClientMenu**: Menú principal para clientes, donde pueden realizar operaciones bancarias.
 - **EmployeeMenu**: Menú principal para empleados, donde pueden gestionar transacciones y estadísticas.
 
+## UI SWING - Nueva versión
+
+En esta versión se cambia el look and feel de consola a una interfaz gráfica de usuario (GUI) utilizando Java Swing. La aplicación ahora cuenta con una interfaz.
+La interfaz gráfica está imlementada con Java Swing y cuenta con las siguientes ventanas/componentes:
+
+- **LoginWindow**: Panel de inicio de sesión para clientes y empleados. Permite ingresar DNI y clave y redirige a la ventana correspondiente según el tipo de usuario.
+- **RegisterWindow**: Panel de registro de nuevos clientes. Solicita y valida los datos antes de registrar.
+- **ClientMenuWindow**: Menú principal para clientes autenticados. Permite consultar saldo, ver historial de transacciones, realizar depósitos, retiros y transferencias, y cerrar sesión.
+- **EmployeeMenuWindow**: Menú principal para empleados. Permite ver todas las transacciones, consultar estadísticas del cajero, cargar dinero al ATM, activar/desactivar "Playpen Mode" y cerrar sesión.
+- **MainFrameWindow**: Ventana principal de la aplicación. Gestiona la navegación entre login, registro y los menús de cliente/empleado según el tipo de usuario autenticado.
+
+Cada ventana está diseñada como un `JPanel` y usa `JTabbedPane` para simular un MVC.
+
 ---
 
 

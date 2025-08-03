@@ -102,5 +102,70 @@ public class TransactionService {
         System.out.println("Clientes activos: " + activeClients.size());
     } // Could use the sb builder to make this method more readable, but it's not necessary for now
 
+    // In src/main/java/com/playpenbank/service/TransactionService.java
+
+    public String getATMStatsString() {
+        List<TransactionDTO> all = transactionDAO.findAll();
+        if (all.isEmpty()) {
+            return "No transactions recorded.";
+        }
+
+        int totalTransactions = all.size();
+        double totalDeposited = 0;
+        double totalWithdrawn = 0;
+        int totalTransfers = 0;
+        int totalDeposits = 0;
+        int totalWithdrawals = 0;
+        Map<String, Integer> typeCount = new HashMap<>();
+        Set<Integer> activeClients = new HashSet<>();
+
+        for (TransactionDTO t : all) {
+            typeCount.put(t.getType(), typeCount.getOrDefault(t.getType(), 0) + 1);
+            activeClients.add(t.getClientId());
+            switch (t.getType()) {
+                case "deposit":
+                    totalDeposited += t.getAmount();
+                    totalDeposits++;
+                    break;
+                case "withdrawal":
+                    totalWithdrawn += t.getAmount();
+                    totalWithdrawals++;
+                    break;
+                case "transfer_in":
+                case "transfer_out":
+                    totalTransfers++;
+                    break;
+            }
+        }
+
+        String mostFrequentType = null;
+        int max = 0;
+        for (var entry : typeCount.entrySet()) {
+            if (entry.getValue() > max) {
+                max = entry.getValue();
+                mostFrequentType = entry.getKey();
+            }
+        }
+
+        return String.format(
+                "--- ATM Statistics ---\n" +
+                        "Total transactions: %d\n" +
+                        "Most frequent type: %s (%d times)\n" +
+                        "Total deposited: $%.2f\n" +
+                        "Total withdrawn: $%.2f\n" +
+                        "Total transfers: %d\n" +
+                        "Total deposits: %d\n" +
+                        "Total withdrawals: %d\n" +
+                        "Active clients: %d\n",
+                totalTransactions,
+                mostFrequentType != null ? mostFrequentType : "N/A", max,
+                totalDeposited,
+                totalWithdrawn,
+                totalTransfers,
+                totalDeposits,
+                totalWithdrawals,
+                activeClients.size()
+        );
+    }
 
 }
