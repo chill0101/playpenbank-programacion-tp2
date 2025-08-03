@@ -240,7 +240,3 @@ CREATE TABLE atm (
 --
 --
 
-
-```java
-// El empleado tiene una funcionalidad secreta introduciendo 2001 en el menú!
-```
