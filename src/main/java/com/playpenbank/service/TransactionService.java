@@ -102,9 +102,6 @@ public class TransactionService {
         System.out.println("Clientes activos: " + activeClients.size());
     } // Could use the sb builder to make this method more readable, but it's not necessary for now
 
-    // In src/main/java/com/playpenbank/service/TransactionService.java
-
-    public String getATMStatsString() {
         List<TransactionDTO> all = transactionDAO.findAll();
         if (all.isEmpty()) {
             return "No transactions recorded.";
